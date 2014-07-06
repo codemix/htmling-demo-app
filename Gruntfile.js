@@ -31,7 +31,8 @@ module.exports = function (grunt) {
         tasks: ['develop', 'delayed-livereload']
       },
       js: {
-        files: ['public/js/*.js'],
+        files: ['ui/app/{,*/}*.js'],
+        tasks: ['jshint', 'browserify'],
         options: {
           livereload: reloadPort
         }
@@ -44,7 +45,7 @@ module.exports = function (grunt) {
         }
       },
       html: {
-        files: ['views/*.html', 'views/**/*.html'],
+        files: ['ui/{,*/}*.html'],
         options: {
           livereload: reloadPort
         }
@@ -68,7 +69,26 @@ module.exports = function (grunt) {
           "public/css/app.css": "less/app.less"
         }
       }
-    }
+    },
+    browserify: {
+      development: {
+        src: ['ui/app/{,*/}*.js'],
+        options: {
+
+        },
+        dest: 'public/js/app.js'
+      }
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      all: [
+        'Gruntfile.js',
+        'public/js/src/{,*/}*.js'
+      ]
+    },
   });
 
   grunt.config.requires('watch.server.files');

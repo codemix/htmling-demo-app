@@ -14,8 +14,16 @@ var app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.engine('html', HTMLing.express(__dirname + '/views/', {watch: true, minify: true}));
+  app.set('views', __dirname + '/ui/views');
+  app.engine('html', HTMLing.express(__dirname + '/ui/views/', {
+    watch: true,
+    minify: true,
+    Template: HTMLing.Template.extend('CustomTemplate', {
+      cdn: function (url) {
+        return '/ui' + url;
+      }
+    })
+  }));
   app.set('view engine', 'html');
   app.use(express.favicon());
   app.use(express.logger('dev'));
