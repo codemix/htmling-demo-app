@@ -1,12 +1,12 @@
 {
   "name": "htmling-demo-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
     "express": "~3.3.4",
-    "htmling": "0.0.3"
+    "htmling": "0.0.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
